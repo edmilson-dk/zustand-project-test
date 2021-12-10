@@ -1,7 +1,25 @@
 import create from "zustand";
+import { persist } from "zustand/middleware";
 
-export const useCounterStore = create((set: any) => ({
-  count: 0,
-  increment: () =>
-    set((state: { count: number }) => ({ count: state.count + 1 })),
-}));
+type CounterStateType = {
+  count: number;
+  increment: () => void;
+  decrement: () => void;
+};
+
+export const useCounterStore = create(
+  persist(
+    (set: any) => ({
+      count: 0,
+      increment: () =>
+        set((state: CounterStateType) => ({ count: state.count + 1 })),
+      decrement: () =>
+        set((state: CounterStateType) => ({ count: state.count - 1 })),
+    }),
+    {
+      name: "counterStore",
+    }
+  )
+);
+
+export const counterSelector = (state: CounterStateType) => state;

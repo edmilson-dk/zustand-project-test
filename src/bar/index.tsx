@@ -1,7 +1,8 @@
-import { useCounterStore } from "../stores/counterStore";
+import { useCallback } from "react";
+import { counterSelector, useCounterStore } from "../stores/counterStore";
 
 export function Bar() {
-  const { count } = useCounterStore();
+  const { count } = useCounterStore(useCallback(counterSelector, []));
 
   return (
     <div>
