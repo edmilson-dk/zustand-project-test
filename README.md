@@ -1,1 +1,1 @@
-# zustand-project-test
+# Zustand project
